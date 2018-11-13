@@ -11,6 +11,7 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
 
+import com.surecn.demo.utils.AppUtils;
 import com.surecn.demo.utils.CommandUtils;
 
 import java.util.ArrayList;
@@ -22,7 +23,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     private List<Item> mData = new ArrayList<Item>(); {
         mData.add(new Item(0,"设置默认输入法", "Root下设置默认输入法"));
-        mData.add(new Item(1,"设置默认输入法", "Root下设置默认输入法"));
+        mData.add(new Item(1,"获取签名", "获取签名"));
     }
 
     // Used to load the 'native-lib' library on application startup.
@@ -46,7 +47,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
             @Override
             public MainViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-                View view = (ViewGroup) getLayoutInflater().inflate(R.layout.list_item, null);
+                View view = (ViewGroup) getLayoutInflater().inflate(R.layout.list_item, parent, false);
                 view.setOnClickListener(MainActivity.this);
                 return new MainViewHolder(view);
             }
@@ -65,7 +66,26 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     @Override
     public void onClick(View v) {
-
+        Object obj = v.getTag();
+        if (obj == null) {
+            return;
+        }
+        Item item = (Item) obj;
+        switch (item.mIndex) {
+            case 0:{//设置默认输入法
+                /**
+                 * 以root权限执行以下命令
+                 * 1.启用相应输入法
+                 * 2.设置默认输入法
+                 */
+                CommandUtils.executeRootCommand("settings put secure enabled_input_methods 'com.sohu.inputmethod.sogou/.SogouIME:com.google.android.inputmethod.pinyin/.PinyinIME;113646356:com.samsung.inputmethod/.SamsungIME:com.xh.ime/.OpenWnnZHCN'");
+                CommandUtils.executeRootCommand("settings put secure default_input_method 'com.sohu.inputmethod.sogou/.SogouIME'");
+                break;}
+            case 1:{//
+                AppUtils.getSignMd5Str(MainActivity.this);
+                break;}
+        }
+        Log.e("onClick", "" + v.getTag());
     }
 
     public static class Item {
@@ -79,7 +99,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         }
     }
 
-    public static class MainViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
+    public static class MainViewHolder extends RecyclerView.ViewHolder {
 
         private TextView mTxtTitle;
 
@@ -97,26 +117,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             mTxtDesc.setText(data.mDesc);
         }
 
-        @Override
-        public void onClick(View v) {
-            Object obj = v.getTag();
-            if (obj == null) {
-                return;
-            }
-            Item item = (Item) obj;
-            switch (item.mIndex) {
-                case 0:{//设置默认输入法
-                    /**
-                     * 以root权限执行以下命令
-                     * 1.启用相应输入法
-                     * 2.设置默认输入法
-                     */
-                    CommandUtils.executeRootCommand("settings put secure enabled_input_methods 'com.sohu.inputmethod.sogou/.SogouIME:com.google.android.inputmethod.pinyin/.PinyinIME;113646356:com.samsung.inputmethod/.SamsungIME:com.xh.ime/.OpenWnnZHCN'");
-                    CommandUtils.executeRootCommand("settings put secure default_input_method 'com.sohu.inputmethod.sogou/.SogouIME'");
-                    break;}
-            }
-            Log.e("onClick", "" + v.getTag());
-        }
     }
 
 //
