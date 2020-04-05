@@ -1,5 +1,8 @@
-package com.surecn.demo.view.opengles.utils;
+package com.surecn.demo.opengles.utils;
 
+import android.os.Build;
+
+import com.surecn.demo.BuildConfig;
 import com.surecn.demo.utils.log;
 
 import static android.opengl.GLES20.GL_COMPILE_STATUS;
@@ -36,19 +39,20 @@ public class ShaderHelper {
     }
 
     private static int compileShader(int type, String shaderCode) {
-        final int shaderObjectId = glCreateShader(type);
+
+        final int shaderObjectId = glCreateShader(type);//创建着色器对象
         if (shaderObjectId == 0) {
-            log.w("Could not create new shader.");
+            log.e("Could not create new shader.");
             return 0;
         }
-        glShaderSource(shaderObjectId, shaderCode);
-        glCompileShader(shaderObjectId);
+        glShaderSource(shaderObjectId, shaderCode);//绑定着色器源代码
+        glCompileShader(shaderObjectId);//编译着色器源代码
         final int[] compileStatus = new int[1];
-        glGetShaderiv(shaderObjectId, GL_COMPILE_STATUS, compileStatus, 0);
+        glGetShaderiv(shaderObjectId, GL_COMPILE_STATUS, compileStatus, 0);//取出编译结果
         log.v("Results of compiling source:\n"+ shaderCode + ":" + glGetShaderInfoLog(shaderObjectId));
         if (compileStatus[0] == 0) {
             glDeleteShader(shaderObjectId);
-            log.w("Compilation of shader failed");
+            log.e("Compilation of shader failed");
             return 0;
         }
 
@@ -56,28 +60,28 @@ public class ShaderHelper {
     }
 
     public static int linkProgram(int vertexShaderId, int fragmentShaderId) {
-        final int programObjectId = glCreateProgram();
+        final int programObjectId = glCreateProgram();//新建程序对象
         if (programObjectId == 0) {
-            log.w("Could not create new program");
+            log.e("Could not create new program");
             return 0;
         }
-        glAttachShader(programObjectId, vertexShaderId);
-        glAttachShader(programObjectId, fragmentShaderId);
-        glLinkProgram(programObjectId);
+        glAttachShader(programObjectId, vertexShaderId);//附加顶点着色器
+        glAttachShader(programObjectId, fragmentShaderId);//附加片段着色器
+        glLinkProgram(programObjectId);//链接
 
         final int[] linkStatus = new int[1];
         glGetProgramiv(programObjectId, GL_LINK_STATUS, linkStatus, 0);
         log.v("Results of linking program:" + glGetProgramInfoLog(programObjectId));
         if (linkStatus[0] == 0) {
             glDeleteShader(programObjectId);
-            log.w("Linking of program failed.");
+            log.e("Linking of program failed.");
             return 0;
         }
         return programObjectId;
     }
 
     public static boolean validateProgram(int programObjectId) {
-        glValidateProgram(programObjectId);
+        glValidateProgram(programObjectId);//验证程序
 
         final int[] validateStautus = new int[1];
         glGetProgramiv(programObjectId, GL_VALIDATE_STATUS, validateStautus, 0);
@@ -85,6 +89,22 @@ public class ShaderHelper {
         return validateStautus[0] != 0;
     }
 
+    public static int buildProgram(String vertexShaderSource, String fragmentShaderSource) {
+        int program;
+
+        // Compile the shaders.
+        int vertexShader = compileVertexShader(vertexShaderSource);
+        int framentShader = compileFragmentShader(fragmentShaderSource);
+
+        // Link them into a shader program.
+        program = linkProgram(vertexShader, framentShader);
+
+        if (BuildConfig.DEBUG) {
+            validateProgram(program);
+        }
+
+        return program;
+    }
 
 
 }

@@ -17,6 +17,7 @@ import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 
+import com.opensource.svgaplayer.SVGADrawable;
 import com.opensource.svgaplayer.SVGAImageView;
 import com.opensource.svgaplayer.SVGAParser;
 import com.opensource.svgaplayer.SVGAVideoEntity;
@@ -37,29 +38,29 @@ public class SvgaActivity extends BaseActivity {
 
         final SVGAImageView imageView = new SVGAImageView(this);
         SVGAParser parser = new SVGAParser(this);
-        parser.parse("zhandouji_6s", new SVGAParser.ParseCompletion() {
+        parser.parse("qianniansun_6s", new SVGAParser.ParseCompletion() {
             @Override
             public void onComplete(@NotNull SVGAVideoEntity videoItem) {
-//                SVGADrawable drawable = new SVGADrawable(videoItem);
-//                imageView.setImageDrawable(drawable);
-//                imageView.startAnimation();
+                SVGADrawable drawable = new SVGADrawable(videoItem);
+                imageView.setImageDrawable(drawable);
+                imageView.startAnimation();
             }
             @Override
             public void onError() {
             }
         });
 
-        parser.parse("demo.svga", new SVGAParser.ParseCompletion() {
-            @Override
-            public void onComplete(@NotNull SVGAVideoEntity videoItem) {
-//                SVGADrawable drawable = new SVGADrawable(videoItem);
-//                imageView.setImageDrawable(drawable);
-//                imageView.startAnimation();
-            }
-            @Override
-            public void onError() {
-            }
-        });
+//        parser.parse("demo.svga", new SVGAParser.ParseCompletion() {
+//            @Override
+//            public void onComplete(@NotNull SVGAVideoEntity videoItem) {
+////                SVGADrawable drawable = new SVGADrawable(videoItem);
+////                imageView.setImageDrawable(drawable);
+////                imageView.startAnimation();
+//            }
+//            @Override
+//            public void onError() {
+//            }
+//        });
 
         setContentView(imageView);
 

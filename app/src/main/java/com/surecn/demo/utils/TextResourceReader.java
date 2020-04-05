@@ -1,6 +1,7 @@
 package com.surecn.demo.utils;
 
 import android.content.Context;
+import android.content.res.Resources;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -26,7 +27,9 @@ public class TextResourceReader {
                 body.append("\n");
             }
         } catch (IOException e) {
-            e.printStackTrace();
+            throw new RuntimeException("Could not open resource:" + resourceId, e);
+        } catch (Resources.NotFoundException e) {
+            throw new RuntimeException("Resource not found:" + resourceId, e);
         }
         return body.toString();
     }

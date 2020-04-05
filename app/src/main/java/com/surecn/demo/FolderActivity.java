@@ -26,14 +26,15 @@ public abstract class FolderActivity extends AppCompatActivity{
         mRecyclerView.setLayoutManager(layoutManager);
         setContentView(mRecyclerView, new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT));
         ActionBar actionBar = getSupportActionBar();
-        actionBar.setHomeButtonEnabled(true);
-        actionBar.setDisplayHomeAsUpEnabled(true);
+        //actionBar.setHomeButtonEnabled(true);
+        //actionBar.setDisplayHomeAsUpEnabled(true);
         if (getIntent().hasExtra("title")) {
             actionBar.setTitle(getIntent().getStringExtra("title"));
         }
 
         ListAdapter listAdapter = new ListAdapter(this, getData());
         mRecyclerView.setAdapter(listAdapter);
+
     }
 
     protected abstract List<Item> getData();

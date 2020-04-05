@@ -1,4 +1,4 @@
-package com.surecn.demo.view.opengles;
+package com.surecn.demo.opengles.test;
 
 import android.opengl.GLSurfaceView;
 import android.opengl.GLU;
