@@ -1,7 +1,7 @@
 package com.surecn.demo.opengles.ch07.objects;
 
 import com.surecn.demo.opengles.data.VertexArray;
-import com.surecn.demo.opengles.ch07.ColorShaderProgram;
+import com.surecn.demo.opengles.ch07.program.ColorShaderProgram;
 
 import static android.opengl.GLES20.GL_POINTS;
 import static android.opengl.GLES20.glDrawArrays;

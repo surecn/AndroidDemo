@@ -7,6 +7,8 @@ import com.surecn.demo.R;
 import com.surecn.demo.opengles.ch08.objects.Mallet;
 import com.surecn.demo.opengles.ch08.objects.Puck;
 import com.surecn.demo.opengles.ch08.objects.Table;
+import com.surecn.demo.opengles.ch08.program.ColorShaderProgram;
+import com.surecn.demo.opengles.ch08.program.TextureShaderProgram;
 import com.surecn.demo.opengles.utils.MatrixHelper;
 import com.surecn.demo.opengles.utils.TextureHelper;
 

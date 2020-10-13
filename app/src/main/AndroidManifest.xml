@@ -4,6 +4,11 @@
     package="com.surecn.demo">
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.CAMERA"/>
+    <uses-permission android:name="android.hardware.camera"/>
+    <uses-permission android:name="android.permission.RECORD_AUDIO" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-feature android:name="android.software.live_wallpaper"/>
+    <uses-feature android:glEsVersion="0x00020000" android:required="true"/>
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -14,13 +19,13 @@
         <activity
             android:name=".MainActivity"
             android:screenOrientation="portrait">
-
-        </activity>
-        <activity android:name=".opengles.OpenGLActivity" android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+        </activity>
+        <activity android:name=".opengles.OpenGLActivity" android:screenOrientation="portrait">
+
         </activity>
         <activity android:name=".opengles.AirHockeyActivity" />
         <activity android:name=".opengles.ch03.AirHockeyActivity" android:screenOrientation="portrait"/>
@@ -29,10 +34,28 @@
         <activity android:name=".opengles.ch06.AirHockey3DActivity" android:screenOrientation="portrait"/>
         <activity android:name=".opengles.ch07.AirHockey3DActivity" android:screenOrientation="portrait"/>
         <activity android:name=".opengles.ch08.AirHockey3DActivity" android:screenOrientation="portrait"/>
+        <activity android:name=".opengles.ch09.AirHockeyTouchActivity" android:screenOrientation="portrait"/>
+        <activity android:name=".opengles.ch10.ParticlesActivity" android:screenOrientation="portrait"/>
+        <activity android:name=".opengles.ch11.ParticlesActivity" android:screenOrientation="portrait"/>
+        <activity android:name=".opengles.ch12.ParticlesActivity" android:screenOrientation="portrait"/>
+        <activity android:name=".opengles.ch13.ParticlesActivity" android:screenOrientation="portrait"/>
+        <activity android:name=".live.LiveActivity" android:screenOrientation="portrait"/>
         <activity android:name=".opengles.AirHockey3DActivity" />
         <activity android:name=".view.SvgaActivity" />
         <activity android:name=".NewActivity"></activity>
         <activity android:name=".view.LogcatActivity"></activity>
+        <activity android:name=".mvvm.ui.MvvmActivity" />
+
+        <service android:name=".opengles.ch14.GLWallpaperService"
+            android:label="@string/app_name"
+            android:permission="android.permission.BIND_WALLPAPER">
+            <intent-filter>
+                <action android:name="android.service.wallpaper.WallpaperService"/>
+            </intent-filter>
+            <meta-data
+                android:name="android.service.wallpaper"
+                android:resource="@xml/wallpaper"/>
+        </service>
     </application>
 
 </manifest>

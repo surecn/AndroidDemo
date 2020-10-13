@@ -1,6 +1,6 @@
 package com.surecn.demo.opengles.ch08.objects;
 
-import com.surecn.demo.opengles.ch08.TextureShaderProgram;
+import com.surecn.demo.opengles.ch08.program.TextureShaderProgram;
 import com.surecn.demo.opengles.data.VertexArray;
 
 import static android.opengl.GLES20.GL_TRIANGLE_FAN;

@@ -1,7 +1,10 @@
 package com.surecn.demo;
 
 import android.app.Application;
+import android.arch.persistence.room.Room;
+import android.arch.persistence.room.RoomDatabase;
 
+import com.surecn.demo.mvvm.dao.AppDatabase;
 import com.surecn.demo.utils.log;
 
 /**

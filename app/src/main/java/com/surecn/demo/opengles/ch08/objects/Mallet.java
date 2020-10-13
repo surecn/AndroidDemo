@@ -1,14 +1,10 @@
 package com.surecn.demo.opengles.ch08.objects;
 
-import com.surecn.demo.opengles.ch08.ColorShaderProgram;
+import com.surecn.demo.opengles.ch08.program.ColorShaderProgram;
 import com.surecn.demo.opengles.data.VertexArray;
 import com.surecn.demo.opengles.utils.Geometry;
 
 import java.util.List;
-
-import static android.opengl.GLES20.GL_POINTS;
-import static android.opengl.GLES20.glDrawArrays;
-import static com.surecn.demo.opengles.Constants.BYTES_PER_FLOAT;
 
 /**
  * User: surecn(surecn@163.com)

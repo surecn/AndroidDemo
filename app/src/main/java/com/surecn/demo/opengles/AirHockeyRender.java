@@ -6,8 +6,8 @@ import android.opengl.GLSurfaceView;
 import com.surecn.demo.R;
 import com.surecn.demo.opengles.ch07.objects.Mallet;
 import com.surecn.demo.opengles.ch07.objects.Table;
-import com.surecn.demo.opengles.ch07.ColorShaderProgram;
-import com.surecn.demo.opengles.ch07.TextureShaderProgram;
+import com.surecn.demo.opengles.ch07.program.ColorShaderProgram;
+import com.surecn.demo.opengles.ch07.program.TextureShaderProgram;
 import com.surecn.demo.opengles.utils.MatrixHelper;
 import com.surecn.demo.opengles.utils.TextureHelper;
 

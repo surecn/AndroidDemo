@@ -1,7 +1,7 @@
 package com.surecn.demo.opengles.ch07.objects;
 
 import com.surecn.demo.opengles.data.VertexArray;
-import com.surecn.demo.opengles.ch07.TextureShaderProgram;
+import com.surecn.demo.opengles.ch07.program.TextureShaderProgram;
 import static android.opengl.GLES20.GL_TRIANGLE_FAN;
 import static android.opengl.GLES20.glDrawArrays;
 import static com.surecn.demo.opengles.Constants.BYTES_PER_FLOAT;
