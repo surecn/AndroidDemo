@@ -1,7 +1,9 @@
 package com.surecn.demo.mvvm.viewmodel;
 
+import android.app.Application;
 import android.arch.lifecycle.MutableLiveData;
 import android.arch.lifecycle.ViewModel;
+import android.arch.lifecycle.ViewModelProvider;
 import android.arch.persistence.room.Room;
 import android.content.Context;
 import android.support.annotation.NonNull;
@@ -13,16 +15,14 @@ import io.reactivex.Observable;
 import io.reactivex.ObservableEmitter;
 import io.reactivex.ObservableOnSubscribe;
 
-public class MvvmViewModel extends ViewModel {
-
-    private Context mContext;
+public class MvvmViewModel extends AndroidViewModel {
 
     private final MutableLiveData<String> mResultLiveData = new MutableLiveData<>();
 
     private AppDatabase mAppDatabase;
 
-    public MvvmViewModel(@NonNull Context context) {
-        mContext = context;
+    public MvvmViewModel(@NonNull Application context) {
+        super(context);
         mAppDatabase = Room.databaseBuilder(mContext, AppDatabase.class, "android_room.db")
                 .allowMainThreadQueries()
                 .build();
@@ -53,5 +53,17 @@ public class MvvmViewModel extends ViewModel {
         return mResultLiveData;
     }
 
+    public static class Factory implements ViewModelProvider.Factory {
+        private Application mContext;
+
+        public Factory(Application context) {
+            mContext = context;
+        }
+
+        @Override
+        public <T extends ViewModel> T create(Class<T> modelClass) {
+            return (T) new MvvmViewModel(mContext);
+        }
+    }
 
 }
